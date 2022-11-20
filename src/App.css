@@ -1,38 +1,321 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:wght@300,600,800&display=swap");
+
+:root {
+  --dark-mode-element: hsl(209, 23%, 22%);
+  --dark-mode-bg: hsl(207, 26%, 17%);
+  --light-mode-element: #fff;
+  --light-mode-bg: hsl(0, 0%, 98%);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: "Nunito Sans";
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app {
+  background-color: var(--light-mode-bg);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100%;
+}
+
+.app.darkMode {
+  background-color: var(--dark-mode-element);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.app_body {
+  margin: 15px auto 0;
+  padding: 15px;
+  max-width: 1400px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.header {
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header.darkMode {
+  background-color: var(--dark-mode-element);
+  color: white;
+}
+
+.header_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.switch_mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.inputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search_input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  padding: 5px;
+  border-radius: 5px;
+  gap: 5px;
+}
+
+.search_input input {
+  border: 0;
+  background-color: transparent;
+  font-size: 18px;
+  outline: none;
+}
+
+.search_input.darkMode {
+  background-color: var(--dark-mode-element);
+  color: white;
+}
+
+.search_input.darkMode input {
+  color: white;
+}
+
+.select_region {
+  width: 300px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.select_region select {
+  padding: 5px;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.select_region.darkMode {
+  background-color: var(--dark-mode-element);
+  color: white;
+}
+
+.select_region.darkMode select {
+  color: white;
+}
+
+.select_region.darkMode option {
+  background-color: var(--dark-mode-element);
+}
+
+.search_input.darkMode input::placeholder {
+  color: white;
+}
+
+.countries {
+  max-width: 1440px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+.country {
+  background-color: white;
+  width: 305px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  height: 370px;
+  cursor: pointer;
+}
+
+.loading {
+  font-size: 75px;
+  font-weight: 600;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.country.darkMode {
+  background-color: var(--dark-mode-element);
+  color: white;
+}
+
+.country .flag_container {
+  height: 170px;
+  width: 100%;
+}
+
+.country .flag_container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.country .name {
+  margin-bottom: 10px;
+}
+
+.country .values {
+  color: gray;
+}
+
+.country .values.darkMode {
+  color: lightgray;
+}
+
+.country .details {
+  padding: 15px;
+}
+
+.country .details p {
+  margin-bottom: 5px;
+}
+
+.country_details {
+  margin: 15px auto 0;
+  padding: 15px;
+  max-width: 1400px;
+  min-height: 100vh;
+}
+
+.back {
+  background-color: white;
+  border: 0;
+  outline: 0;
+  margin-bottom: 25px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back.darkMode {
+  background-color: var(--dark-mode-element);
+  color: white;
+}
+
+.country_details_body {
+  margin: 15px auto 0;
+  padding: 15px;
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.img_container {
+  flex: 0.5;
+}
+
+.img_container img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.info {
+  flex: 0.5;
+}
+
+.info.darkMode {
+  background-color: var(--dark-mode-element);
+  color: white;
+}
+
+.info_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 45px;
+}
+
+.ingo h2 {
+  margin-bottom: 15px;
+}
+
+.info .values {
+  color: gray;
+}
+
+.info .values.darkMode {
+  background-color: var(--dark-mode-element);
+  color: white;
+}
+
+.border_country {
+  padding: 5px 10px;
+  background-color: white;
+  display: inline-block;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  cursor: pointer;
+}
+
+.border_country.darkMode {
+  background-color: var(--dark-mode-element);
+  color: white;
+}
+
+@media (max-width: 800px) {
+  .country_details_body {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+
+  .info_container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .left_info {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  .inputs {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 15px;
+  }
+
+  .search_input {
+    margin-bottom: 20px;
+    width: 100%;
+    justify-content: start;
+    gap: 30px;
+  }
+
+  .select_region {
+    width: 100%;
+  }
+
+  .switch_mode {
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    flex: 0.5;
+    font-size: 17px;
   }
 }
