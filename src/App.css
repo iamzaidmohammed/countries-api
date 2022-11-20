@@ -22,10 +22,22 @@ body {
   color: white;
 }
 
-.app_body {
+.app_body,
+.not_found {
   margin: 15px auto 0;
   padding: 15px;
   max-width: 1400px;
+}
+
+.not_found img {
+  width: 360px;
+  text-align: center;
+}
+
+.not_found p {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .header {

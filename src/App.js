@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Header from "./components/Header";
 import Country from "./components/Country";
 import CountryDetails from "./components/CountryDetails";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -12,6 +13,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const countriesInputRef = useRef();
   const regionRef = useRef();
+  const notFound = countries.status || countries.message;
 
   const switchMode = () => {
     setDarkMode((prevState) => !prevState);
@@ -40,21 +42,6 @@ function App() {
     const inputValue = countriesInputRef.current.value;
 
     if (inputValue.trim()) {
-      // const fetchSearchData = async () => {
-      //   const response = await fetch(
-      //     `https://restcountries.com/v2/name/${inputValue}`
-      //   );
-      //   const data = response.json();
-
-      //   setCountries(data);
-      // };
-
-      // try {
-      //   fetchSearchData();
-      // } catch (error) {
-      //   console.log(error);
-      // }
-
       fetch(`https://restcountries.com/v2/name/${inputValue}`)
         .then((res) => res.json())
         .then((countries) => {
@@ -107,20 +94,24 @@ function App() {
               </div>
 
               <div className="countries">
-                {countries.map((country) => {
-                  return (
-                    <Country
-                      darkMode={darkMode}
-                      key={country.alpha3Code}
-                      code={country.alpha3Code}
-                      name={country.name}
-                      capital={country.capital}
-                      population={country.population}
-                      region={country.region}
-                      flag={country.flag}
-                    />
-                  );
-                })}
+                {!notFound ? (
+                  countries.map((country) => {
+                    return (
+                      <Country
+                        darkMode={darkMode}
+                        key={country.alpha3Code}
+                        code={country.alpha3Code}
+                        name={country.name}
+                        capital={country.capital}
+                        population={country.population}
+                        region={country.region}
+                        flag={country.flag}
+                      />
+                    );
+                  })
+                ) : (
+                  <NotFound />
+                )}
               </div>
             </div>
           }

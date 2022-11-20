@@ -10,9 +10,10 @@ const Country = ({ darkMode, name, capital, population, region, flag }) => {
         <p>
           Pupolation:{" "}
           <span className={`values ${darkMode ? "darkMode" : ""}`}>
-            {population}
+            {population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </span>
         </p>
+
         <p>
           Region:{" "}
           <span className={`values ${darkMode ? "darkMode" : ""}`}>
