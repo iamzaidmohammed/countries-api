@@ -2,7 +2,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useState } from "react";
 
 const Header = ({ onClick, darkMode }) => {
-  const [darkModeText, setDarkModeText] = useState(true);
+  const [darkModeText, setDarkModeText] = useState(false);
 
   const switchText = () => setDarkModeText(!darkModeText);
 

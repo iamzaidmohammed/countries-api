@@ -8,7 +8,7 @@ import CountryDetails from "./components/CountryDetails";
 import NotFound from "./components/NotFound";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const countriesInputRef = useRef();
@@ -35,7 +35,11 @@ function App() {
   }, []);
 
   if (loading) {
-    return <p className="loading">Loading...</p>;
+    return (
+      <div className="load">
+        <p className="loading">Loading...</p>;
+      </div>
+    );
   }
 
   const searchCountries = () => {
@@ -62,6 +66,33 @@ function App() {
     }
   };
 
+  const filterCountries = () => {
+    const selectValue = regionRef.current.value;
+
+    if (selectValue.trim()) {
+      if (selectValue === "All") {
+        fetch("https://restcountries.com/v2/all")
+          .then((res) => res.json())
+          .then((countries) => {
+            setCountries(countries);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        fetch(`https://restcountries.com/v2/region/${selectValue}
+        `)
+          .then((res) => res.json())
+          .then((countries) => {
+            setCountries(countries);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+  };
+
   return (
     <div className={`app ${darkMode ? "darkMode" : ""}`}>
       <Header onClick={switchMode} darkMode={darkMode} />
@@ -82,13 +113,13 @@ function App() {
                   />
                 </div>
                 <div className={`select_region ${darkMode ? "darkMode" : ""}`}>
-                  <select ref={regionRef}>
-                    <option value="">All</option>
-                    <option value="">Africa</option>
-                    <option value="">America</option>
-                    <option value="">Asia</option>
-                    <option value="">Europe</option>
-                    <option value="">Oceania</option>
+                  <select ref={regionRef} onChange={filterCountries}>
+                    <option>All</option>
+                    <option>Africa</option>
+                    <option>Americas</option>
+                    <option>Asia</option>
+                    <option>Europe</option>
+                    <option>Oceania</option>
                   </select>
                 </div>
               </div>

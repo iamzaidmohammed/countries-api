@@ -153,6 +153,12 @@ body {
   cursor: pointer;
 }
 
+.load {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--dark-mode-element);
+}
+
 .loading {
   font-size: 75px;
   font-weight: 600;
@@ -160,6 +166,7 @@ body {
   position: absolute;
   top: 50%;
   right: 50%;
+  color: white;
   transform: translate(50%, -50%);
 }
 
