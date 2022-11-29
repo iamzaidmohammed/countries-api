@@ -151,6 +151,11 @@ body {
   border-radius: 5px;
   height: 370px;
   cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.country:hover {
+  transform: scale(1.015);
 }
 
 .load {
@@ -264,7 +269,7 @@ body {
 
 .info_container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 45px;
 }

@@ -1,6 +1,22 @@
-const Country = ({ darkMode, name, capital, population, region, flag }) => {
+const Country = ({
+  darkMode,
+  name,
+  capital,
+  population,
+  region,
+  flag,
+  showDetails,
+  code,
+}) => {
+  const handleShowDetails = () => {
+    showDetails(code);
+  };
+
   return (
-    <div className={`country ${darkMode ? "darkMode" : ""}`}>
+    <div
+      onClick={handleShowDetails}
+      className={`country ${darkMode ? "darkMode" : ""}`}
+    >
       <div className="flag_container">
         <img src={flag} alt="" />
       </div>
@@ -10,7 +26,7 @@ const Country = ({ darkMode, name, capital, population, region, flag }) => {
         <p>
           Pupolation:{" "}
           <span className={`values ${darkMode ? "darkMode" : ""}`}>
-            {population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            {population}
           </span>
         </p>
 

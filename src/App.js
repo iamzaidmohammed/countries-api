@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import Header from "./components/Header";
 import Country from "./components/Country";
@@ -13,6 +13,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const countriesInputRef = useRef();
   const regionRef = useRef();
+  const navigate = useNavigate();
   const notFound = countries.status || countries.message;
 
   const switchMode = () => {
@@ -54,8 +55,15 @@ function App() {
         .catch((error) => {
           console.log(error);
         });
-    } else {
-      fetch("https://restcountries.com/v2/all")
+    }
+  };
+
+  const filterCountries = () => {
+    const selectValue = regionRef.current.value;
+
+    if (selectValue.trim()) {
+      fetch(`https://restcountries.com/v2/region/${selectValue}
+        `)
         .then((res) => res.json())
         .then((countries) => {
           setCountries(countries);
@@ -66,31 +74,8 @@ function App() {
     }
   };
 
-  const filterCountries = () => {
-    const selectValue = regionRef.current.value;
-
-    if (selectValue.trim()) {
-      if (selectValue === "All") {
-        fetch("https://restcountries.com/v2/all")
-          .then((res) => res.json())
-          .then((countries) => {
-            setCountries(countries);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        fetch(`https://restcountries.com/v2/region/${selectValue}
-        `)
-          .then((res) => res.json())
-          .then((countries) => {
-            setCountries(countries);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
+  const showDetails = (code) => {
+    navigate(`/${code}`);
   };
 
   return (
@@ -137,6 +122,7 @@ function App() {
                         population={country.population}
                         region={country.region}
                         flag={country.flag}
+                        showDetails={showDetails}
                       />
                     );
                   })
@@ -149,8 +135,21 @@ function App() {
         />
 
         <Route
-          path="country-details"
-          element={<CountryDetails darkMode={darkMode} />}
+          path="/:countryCode"
+          element={
+            <CountryDetails
+              darkMode={darkMode}
+              countries={countries}
+              refetch={fetch("https://restcountries.com/v2/all")
+                .then((res) => res.json())
+                .then((countries) => {
+                  setCountries(countries);
+                })
+                .catch((error) => {
+                  console.log(error);
+                })}
+            />
+          }
         />
       </Routes>
     </div>

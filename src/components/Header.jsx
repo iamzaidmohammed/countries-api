@@ -1,4 +1,5 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import { useState } from "react";
 
 const Header = ({ onClick, darkMode }) => {
@@ -11,7 +12,11 @@ const Header = ({ onClick, darkMode }) => {
       <div className="header_container">
         <h3 className="logo">Where in the world?</h3>
         <div className="switch_mode" onClick={onClick}>
-          <DarkModeIcon onClick={switchText} />
+          {darkModeText ? (
+            <DarkModeIcon onClick={switchText} />
+          ) : (
+            <LightModeIcon onClick={switchText} />
+          )}
           <h3 onClick={switchText}>
             {darkModeText ? "Dark Mode" : "Light Mode"}
           </h3>
