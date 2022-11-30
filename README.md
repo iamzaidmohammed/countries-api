@@ -35,7 +35,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://github.com/iamzaidmohammed/countries-api](https://github.com/iamzaidmohammed/countries-api)
+- Solution URL: [https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca/hub/rest-countries-api-using-react-NEJIXrOcNZ](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca/hub/rest-countries-api-using-react-NEJIXrOcNZ)
 - Live Site URL: [http://countries-api-snowy-pi.vercel.app/](http://countries-api-snowy-pi.vercel.app/)
 
 ## My process
