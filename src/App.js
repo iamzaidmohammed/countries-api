@@ -59,11 +59,13 @@ function App() {
   const filterCountries = (e) => {
     const selectValue = e.target.value.toLowerCase();
     console.log(selectValue);
-    if (allCountries) {
+    if (selectValue !== "all") {
       const filteredItems = allCountries.filter((item) =>
         item.region.toLowerCase().includes(selectValue)
       );
       setFiltered(filteredItems);
+    } else {
+      setFiltered(allCountries);
     }
   };
 
