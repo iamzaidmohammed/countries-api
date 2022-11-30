@@ -13,10 +13,9 @@ function App() {
   const [allCountries, setAllCountries] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(false);
-  const countriesInputRef = useRef();
+  const [error, setError] = useState(false);
   const regionRef = useRef();
   const navigate = useNavigate();
-  const notFound = countries.status || countries.message;
 
   const switchMode = () => {
     setDarkMode((prevState) => !prevState);
@@ -52,7 +51,15 @@ function App() {
       const filteredItems = allCountries.filter((item) =>
         item.name.toLowerCase().includes(inputValue)
       );
-      setFiltered(filteredItems);
+      if (filteredItems.length > 0) {
+        setError(false);
+        setFiltered(filteredItems);
+      } else if (filteredItems.length === 0 && inputValue !== "") {
+        setError(true);
+      } else if (inputValue === "") {
+        setError(false);
+        setFiltered(allCountries);
+      }
     }
   };
 
@@ -104,7 +111,8 @@ function App() {
               </div>
 
               <div className="countries">
-                {!notFound ? (
+                {" "}
+                {!error ? (
                   filtered.map((country) => {
                     return (
                       <Country
@@ -122,7 +130,7 @@ function App() {
                   })
                 ) : (
                   <NotFound />
-                )}
+                )}{" "}
               </div>
             </div>
           }
